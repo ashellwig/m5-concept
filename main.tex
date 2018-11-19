@@ -20,13 +20,13 @@
   \usepackage{amsmath}
   \usepackage{amsthm}
   \usepackage[toc]{appendix}
-  \usepackage[
-    backend=biber,%
-    style=ieee%
-  ]{biblatex}
+  % \usepackage[
+  %   backend=biber,%
+  %   style=ieee%
+  % ]{biblatex}
 
-  \addbibresource{main.bib}
-  
+  % \addbibresource{main.bib}
+
   \theoremstyle{definition}
   \newtheorem*{defn*}{Definition}
   \theoremstyle{plain}
@@ -94,7 +94,7 @@
     {\left.\begin{aligned}}
     {\end{aligned}\right\rbrace}
 
-  \title{Module 3 Concept Discussion}
+  \title{Module 5 Concept Discussion}
   \author{Ashton Hellwig}
   \date{\today}
   \rhead{CSC160 Concept Discussion}
@@ -110,180 +110,11 @@
 
     \section{Research Prompt}
       \begin{quote}
-        Look forward into Chapter 15 for Recursive
-        Functions.
-        \begin{itemize}
-          \item What is a recursive function and what are 2 applications of
-            recursive functions you can think of?
-        \end{itemize}
+        Placeholder
       \end{quote}
 
     \section{Response}
-      \subsection{What is a Recursive Function?}
-        \textbf{Recursion} is the process of solving a problem by reducing it to
-          smaller versions of itself. There are two types of recursion -- direct
-          and indirect. For a function to be considered
-          \textbf{directly recursive}, it must \textit{call itself}. Much like
-          a recursive function, a \textbf{recursive definition} is a definition
-          in which something is defined in terms of smaller versions of itself,
-          for example:
-          \begin{equation}
-            \begin{ldefinitions}
-              & \text{\textbf{Base Case}} & 0! &= 1 \\
-              &\text{\textbf{General Case}} & n!&=n\times (n-1)!\text{ if }n>0
-              \hspace{20pt}
-            \end{ldefinitions}
-            \text{\textbf{Recursive Definition}}
-          \end{equation}
-
-        From the textbook \autocite{malik_2015}:
-        \begin{quote}
-          In this definition, $0!$ is defined to be $1$, and if $n$ is greater
-            than $0$, first we find $(n-1)!$ and then multiply it by $n$. To
-            find $(n-1)!$, we apply the definition again. If $(n-1)>0$ then we
-            use equation 2, otherwise, we use equation 1.
-
-          \begin{mdframed}[backgroundcolor=yellow!20]
-            \textbf{Example}: Find $3!$
-            \begin{align*}
-              \mathbf{n} &= 3 \\
-              3!         &= 3\times 2 &\text{Since n is 3, use equation 2} \\
-              2!         &= 2\times 1 &\text{Since n is 2, use equation 2} \\
-              1!         &= 1\times 1 &\text{Since n is 1, use equation 2} \\
-              \shortintertext{Finally, use equation 1 since after the previous step}
-              \mathbf{n} &= 0 \\
-              0! &= 1 \\
-              1! &= 1 & \text{Substituting $0!$ into $1!$ gives us this} \\
-              2! &= 2\times 1!=2\times 1=2 & \text{Giving us this} \\
-              3! &= 3\times 2!=3\times 2=6 & \text{Giving us the final answer}
-            \end{align*}
-          \end{mdframed}
-        \end{quote}
-
-        Recursive functions are used to implement recursive algorithms. Below is
-          an example of how the equation above is implemented in C++
-          \autocite{malik_2015}. Note how the function below is a
-          \textit{directly} recursive function 
-
-          \begin{lstlisting}[language=c++,caption=Factorial Function,numbers=left]
-// begin recursive definition
-int fact(int number) {
-  if (number == 0) { // base case
-    return 1;
-  } else {
-    return number * fact(number - 1); // general case
-  }
-} // end recursive definition
-          \end{lstlisting}
-
-          \begin{algorithm}[H]
-            \begin{algorithmic}[1]
-              \Require{$n$, an $integer$} \Comment{$n$ is any integer}
-              \Ensure{$!n$, \text{the factorial of n}} \Comment{Return value}
-              \Statex
-              \GVariables
-                  \State $n\gets integer$
-              \EndGVariables
-              \Statex
-              \Procedure{factorial}{$n$} \Comment{Recursive definition}
-                \If{$n==0$} \Comment{Base Case}
-                  \State \Return $1$
-                \ElsIf{$n>0$} \Comment{General Case}
-                  \State \Return $n\times \text{\Call{factorial}{$n-1$}}$
-                \EndIf
-              \EndProcedure
-            \end{algorithmic}
-            \caption{Factorial Function Algorithm}
-          \end{algorithm}
-
-        Designing a recursive function requires knowledge of the constraints
-          of the problem along with identification of the base and general
-          cases. It is important that care is taken to ensure that the
-          function`s recursive calls ultimately lead to a base case. This will
-          avoid \textbf{infinite recursion}, which occurs when a recursive call
-          results in another recursive call, leading to the perpetual execution
-          of the function.
-
-      \subsection{Recursion Applications}
-        It is best to use recursive functions only when the definition of the
-          problem is inherently recursive, due to the overhead that is brought
-          with recursive functions due to each call requiring new memory
-          allocation and will not deallocate until the recursion is complete. If
-          a problem seems that it could be easily solved with a
-          selection/control structure, that would be a better way of solving it.
-        \subsubsection{Sorting Algorithms}
-          Recursion is incredibly useful for problems which require a sorting
-            algorithm. Most larger technical companies (Facebook, Apple,
-            Microsoft, Amazon, Google, Netflix) have prospective employees
-            perform a white-board coding session in which they are given a
-            problem and told to write an algorithm to solve it. I will use the
-            bubble sort algorithm in recursive manner to illustrate the
-            idea. Bubble sort compares two elements at a time, swapping them in
-            the event that the one on the lower index is greater than the value
-            it is compared with. It is meant for lists and arrays.
-          
-          \begin{algorithm}[H]
-            \caption{Recursive bubble sort}
-            \begin{algorithmic}[1]
-              \Procedure{swapElements}{$firstElement$, $secondElement$}
-                \State $tempValue\gets firstElement$
-                \State $firstElement\gets secondElement$
-                \State $secondElement\gets tempValue$
-              \EndProcedure
-              \State
-              \Procedure{bubbleSort}{$array$, $number$} \Comment{$n=$ size of array}
-                \State $i\gets 0$
-                \State
-                \If{number == 1} \Comment{Base case}
-                    \State \Return
-                \EndIf
-                \State
-                \For{$i<number-1$; $i=i+1$}
-                  \If{$array[i]<array[i+1]$}
-                    \State \Call{swapElements}{$array[i]$, $array[i+1]$}
-                  \EndIf
-                \EndFor
-                \State
-                \State \Call{bubbleSort}{$array$, $n-1$}
-                  \Comment{Those elements sorted, continue over each element}
-              \EndProcedure
-            \end{algorithmic}
-          \end{algorithm}
-          
-        \subsubsection{Tower of Hanoi}
-          The book illustrates another example problem, called the ``Tower of
-            Hanoi'' \autocite{malik_2015}. This problem illustrates recursion
-            by requiring the movement of disks on 3 needles. The disks are all
-            stacked on top of one-another on the first needle. All of the
-            disks are on the first needle in ascending circumference, so that
-            the largest disk is on the bottom with the smallest on the top. Only
-            one disk may move at a time, the removed disk must be placed back
-            on the needles, and a larger disk cannot be above a smaller one. The
-            task is to write a program which outputs the moves required to move
-            all disks from the first to the third needle. In order to work with
-            \textit{three} disks, we begin by moving the top $n-1$ disks from
-            needle 1 to needle 2, using needle 3 to temporarily hold the smaller
-            disk. Next, we move disk $n$ from needle 2 to needle 3, using
-            needle 1 as we did needle 3 prior. Finally repeat the first step,
-            but starting from needle 2 rather than 1. The book provides the
-            following algorithm for the above statements:
-
-            \newpage
-            \begin{lstlisting}[%
-              language=c++,%
-              caption={Tower of Hanoi C++ Algorithm},%
-              numbers=left]
-void moveDisks(int count, int needle1, int needle3, int needle2) {
-  if (count > 0) {
-    moveDisks(count - 1, needle1, needle2, needle3);
-
-    cout << "Move disk " << count << " from " << needle1
-         << " to " << needle3 << "." << '\n';
-
-    moveDisks(count - 1, needle2, needle3, needle1);
-  }
-}
-            \end{lstlisting}
+      Placeholder.
 
 
   \newpage
@@ -291,54 +122,20 @@ void moveDisks(int count, int needle1, int needle3, int needle2) {
 
     \section{Response 1}
       \begin{quote}
-        Reply to \textbf{Tyler Olson} (\textit{Post ID: 34053893})
+        Reply to \textbf{} (\textit{Post ID:})
       \end{quote}
-      What exactly do you mean when you says ``Until VS told it to stop''?
-        Editors and IDEs should not really make that big of an effect on code,
-        and recursive functions are supposed to stop by themselves when they
-        reach the \textit{base case} of the recursive definition. You should not
-        need to hit a ``stop'' button in the IDE for the program to exit
-        normally. When looking at your code, from what I can see, there is no
-        actual base case to the function and so you get stuck in infinite
-        recursion, i.e. when a recursive function calls another recursive
-        function leading to perpetual execution. Here is a recursive function
-        which calculates the factorial of number:
-
-        \begin{lstlisting}[language=c++,numbers=left]
-// begin recursive definition
-int fact(int number) {
-  if (number == 0) { // base case
-    return 1;
-  } else {
-    return number * fact(number - 1); // general case
-  }
-} // end recursive definition
-        \end{lstlisting}
-
-      As you notice in this recursive function, the base case stops the
-        execution of said function when \texttt{number} is 1. Without the base
-        case (as indicated by line 3), the function goes on forever.
-
-      There are also far more examples of recursion than just factorials and
-        other mathematical formulae. Tail recursion can also prevent some of
-        those cases you mentioned about stack overflow and is useful in some
-        instances such as duplicating a linked list (useful for interviews or
-        game design). While I see how recursion can be more prone to crashing
-        I feel that recursive functions are shorter and easier to read than
-        their counterparts, but that may just be a preference thing.
+      Placeholder
 
     \section{Response 2}
       \begin{quote}
         Reply to \textbf{} (\textit{Post ID: })
       \end{quote}
-      
+      Placeholder
 
   % Bibliography
-  \newpage
-  \printbibliography[
-    heading=bibintoc,
-    title={Bibliography}
-  ]
-
-
+  % \newpage
+  % \printbibliography[
+  %   heading=bibintoc,
+  %   title={Bibliography}
+  % ]
 \end{document}

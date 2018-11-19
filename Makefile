@@ -62,7 +62,6 @@ clean:
 
 
 all-clean: clean
-	latexmk -CA
 	$(RM) *.pdf
 	$(RM) *.html
 	$(RM) *.css
