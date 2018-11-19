@@ -20,18 +20,24 @@
   \usepackage{amsmath}
   \usepackage{amsthm}
   \usepackage[toc]{appendix}
-  % \usepackage[
-  %   backend=biber,%
-  %   style=ieee%
-  % ]{biblatex}
+  \usepackage[
+    backend=biber,%
+    style=ieee%
+  ]{biblatex}
 
-  % \addbibresource{main.bib}
+  % Bibliography Setup
+  \addbibresource{main.bib}
+  \newcommand{\CiteSection}[2]{%
+    (\autocite{#1}, ~\S {#1})
+  }
 
+  % Theorem Environments
   \theoremstyle{definition}
   \newtheorem*{defn*}{Definition}
   \theoremstyle{plain}
   \newtheorem*{equ*}{Equation}
 
+  % Definitions for Algorithmic Environments
   \algdef{SE}[VARIABLES]{GVariables}{EndGVariables}
     {\algorithmicvariables}
     {\algorithmicend\ \algorithmicvariables}
@@ -46,6 +52,7 @@
   \renewcommand{\algorithmicensure}{\textbf{Output:}}
   \renewcommand\thealgorithm{}
 
+  % Settings for math-mode
   \makeatletter
   \def\mathcolor#1#{\@mathcolor{#1}}
   \def\@mathcolor#1#2#3{%
@@ -84,10 +91,10 @@
   \pagestyle{fancy}
   \geometry{%
   a4paper,%
-  top=2.5cm,%
-  bottom=2.5cm,%
-  left=2.5cm,%
-  right=2.5cm%
+  top=1in,%
+  bottom=1in,%
+  left=1in,%
+  right=1in%
   }
 
   \newenvironment{ldefinitions}
@@ -110,11 +117,97 @@
 
     \section{Research Prompt}
       \begin{quote}
-        Placeholder
+        Many groups use standard conventions for programming, including the
+          ordering of public and private members in the class. See Examples
+          10-3 through 10-5 for one such convention. What is the advantage of
+          using such a standard? Do you have your own preferences?
       \end{quote}
 
     \section{Response}
-      Placeholder.
+      \subsection{Introduction}
+        First, so no one will have to open the book and view Examples 10.3-10.5,
+          I will include a summary (including the examples) here given in the
+          \S 10.8 of the textbook \autocite{malik_2015}.
+        \begin{lstlisting}[language=c++,caption={Example 10.3},label={e3}]
+class clockType {
+public:
+  void setTime(int, int, int);
+  void getTime(int&, int&, int&) const;
+  void printTime() const;
+  void incrementSeconds();
+  void incrementMinutes();
+  void incrementHours();
+  bool equalTime(const clockType&) const;
+
+private:
+  int hour;
+  int minute;
+  int second;
+}
+        \end{lstlisting}
+        \begin{lstlisting}[language=c++,caption={Example 10.4},label={e4}]
+class clockType {
+private:
+  int hour;
+  int minute;
+  int second;
+
+public:
+  void setTime(int, int, int);
+  void getTime(int&, int&, int&) const;
+  void printTime() const;
+  void incrementSeconds();
+  void incrementMinutes();
+  void incrementHours();
+  bool equalTime(const clockType&) const;
+}
+        \end{lstlisting}
+        \begin{lstlisting}[language=c++,caption={Example 10.5},label={e5}]
+class clockType {
+  int hour;
+  int minute;
+  int second;
+
+public:
+  void setTime(int, int, int);
+  void getTime(int&, int&, int&) const;
+  void printTime() const;
+  void incrementSeconds();
+  void incrementMinutes();
+  void incrementHours();
+  bool equalTime(const clockType&) const;
+}
+        \end{lstlisting}
+
+        Right off the bat, the most notable differences are in that in Listing
+          \ref{e3} the private members are placed after the public members,
+          while Listing \ref{e4} places private members first and Listing
+          \ref{e5} places private members first, without an access specifier.
+
+        The book states that without an access specifier, members default to
+          private and it is common practice to list \textbf{public} members
+          before \textbf{private} members in order to ``focus your attention
+          on the public members'' \autocite{malik_2015}.
+
+        In order to discuss programming standards and conventions (as well as
+          my preferred method of style and convention), we must go over some of
+          the more common programming style-guides/conventions and contrast
+          their motivations.
+
+        \subsection{ISO Standard C++}
+          Placeholder.
+
+        \subsection{LLVM}
+          Placeholder.
+
+        \subsection{Google}
+          Placeholder.
+
+        \subsection{Mozilla}
+          Placeholder.
+
+        \subsection{Microsoft}
+          Placeholder.
 
 
   \newpage
@@ -128,14 +221,14 @@
 
     \section{Response 2}
       \begin{quote}
-        Reply to \textbf{} (\textit{Post ID: })
+        Reply to \textbf{} (\textit{Post ID: }) 
       \end{quote}
       Placeholder
 
   % Bibliography
-  % \newpage
-  % \printbibliography[
-  %   heading=bibintoc,
-  %   title={Bibliography}
-  % ]
+  \newpage
+  \printbibliography[
+    heading=bibintoc,
+    title={Bibliography}
+  ]
 \end{document}
